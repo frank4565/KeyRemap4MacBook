@@ -23,3 +23,5 @@ src/util/multitouchextension/Info.plist
 src/util/prefpane/Info.plist
 src/util/uninstaller/Info.plist
 src/util/updater/Info.plist
+
+src/core/server/KeyRemap4MacBook_server.xcodeproj/project.xcworkspace/xcshareddata/KeyRemap4MacBook_server.xccheckout
