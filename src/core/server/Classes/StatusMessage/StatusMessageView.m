@@ -101,7 +101,7 @@
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
   NSInteger position = [defaults integerForKey:kStatusWindowPosition];
 
-  NSRect screenFrame = [[NSScreen mainScreen] visibleFrame];
+  NSRect screenFrame = [[NSScreen screens][0] visibleFrame];
   NSRect windowFrame = [[self window] frame];
   int margin = 10;
   NSPoint point;

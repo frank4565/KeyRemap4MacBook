@@ -26,7 +26,7 @@
       break;
   }
 
-  NSRect rect = [[NSScreen mainScreen] frame];
+  NSRect rect = [[NSScreen screens][0] frame];
   switch (position) {
     case 0:
       // Top left -> Top
