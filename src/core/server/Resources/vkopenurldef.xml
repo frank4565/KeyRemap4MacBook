@@ -24,6 +24,11 @@
   </vkopenurldef>
 
   <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_WEB_koreankeyboard4macbook</name>
+    <url>https://github.com/niceview/KoreanKeyboard4MacBook</url>
+  </vkopenurldef>
+
+  <vkopenurldef>
     <name>KeyCode::VK_OPEN_URL_WEB_pqrs_org</name>
     <url>https://pqrs.org/</url>
   </vkopenurldef>
@@ -202,6 +207,36 @@
     <url type="shell">
       <![CDATA[
         /usr/bin/osascript -e 'tell application "System Events" to sleep'
+      ]]>
+    </url>
+  </vkopenurldef>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_SHELL_toggle_bluetooth</name>
+    <url type="shell">
+      <![CDATA[
+        /usr/bin/osascript -e 'display notification "Toggle Bluetooth" with title "KeyRemap4MacBook"';
+        /Applications/KeyRemap4MacBook.app/Contents/Library/vendor/bin/blueutil toggle
+      ]]>
+    </url>
+  </vkopenurldef>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_SHELL_toggle_wifi</name>
+    <url type="shell">
+      <![CDATA[
+        CURRENT_DEVICE=`/usr/sbin/networksetup -listallhardwareports | /usr/bin/awk '$3=="Wi-Fi" {getline; print $2}'`;
+        if [ -z "$CURRENT_DEVICE" ]; then
+          /usr/bin/osascript -e 'display notification "No Wi-Fi device" with title "KeyRemap4MacBook"';
+        else
+          if /usr/sbin/networksetup -getairportpower $CURRENT_DEVICE | /usr/bin/grep ': On'; then
+            /usr/sbin/networksetup -setairportpower $CURRENT_DEVICE off
+            /usr/bin/osascript -e 'display notification "Wi-Fi Off" with title "KeyRemap4MacBook"';
+          else
+            /usr/sbin/networksetup -setairportpower $CURRENT_DEVICE on
+            /usr/bin/osascript -e 'display notification "Wi-Fi On" with title "KeyRemap4MacBook"';
+          fi
+        fi
       ]]>
     </url>
   </vkopenurldef>

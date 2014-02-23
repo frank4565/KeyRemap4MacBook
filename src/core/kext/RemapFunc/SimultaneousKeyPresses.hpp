@@ -3,9 +3,7 @@
 
 #include "EventInputQueue.hpp"
 #include "FromEvent.hpp"
-#include "FromKeyChecker.hpp"
 #include "KeyToKey.hpp"
-#include "KeyToPointingButton.hpp"
 #include "RemapFuncClasses.hpp"
 
 namespace org_pqrs_KeyRemap4MacBook {
@@ -17,7 +15,7 @@ namespace org_pqrs_KeyRemap4MacBook {
 
       // This function changes Simultaneous key presses to KeyCode::VK_SIMULTANEOUSKEYPRESSES_xxx
       // It returns true if EventInputQueue::queue_ is changed.
-      bool remap(void);
+      bool remap(bool keyuponly);
       // This function changes KeyCode::VK_SIMULTANEOUSKEYPRESSES_xxx to remapped key/pointing events.
       bool remap(RemapParams& remapParams);
 
@@ -69,18 +67,11 @@ namespace org_pqrs_KeyRemap4MacBook {
       Flags fromFlags_;
 
       // --------------------
-      enum ToType {
-        TOTYPE_NONE,
-        TOTYPE_KEY,
-        TOTYPE_BUTTON,
-      } toType_;
-
       bool isToRaw_;
       bool isStrictKeyOrder_;
       KeyCode toKey_raw_;
 
       KeyToKey keytokey_;
-      KeyToPointingButton keytopointingbutton_;
 
       Vector_DownKeys downKeys_;
     };

@@ -3,9 +3,6 @@
 
 #include "bridge.h"
 #include "RemapFunc/KeyToKey.hpp"
-#include "RemapFunc/KeyToConsumer.hpp"
-#include "RemapFunc/KeyToPointingButton.hpp"
-#include "RemapFunc/ConsumerToConsumer.hpp"
 #include "RemapFunc/DoublePressModifier.hpp"
 #include "RemapFunc/DropKeyAfterRemap.hpp"
 #include "RemapFunc/DropPointingRelativeCursorMove.hpp"
@@ -16,7 +13,6 @@
 #include "RemapFunc/HoldingKeyToKey.hpp"
 #include "RemapFunc/IgnoreMultipleSameKeyPress.hpp"
 #include "RemapFunc/KeyOverlaidModifier.hpp"
-#include "RemapFunc/PointingButtonToPointingButton.hpp"
 #include "RemapFunc/PointingRelativeToScroll.hpp"
 #include "RemapFunc/SimultaneousKeyPresses.hpp"
 #include "RemapFunc/SetKeyboardType.hpp"
@@ -34,7 +30,7 @@ namespace org_pqrs_KeyRemap4MacBook {
 
     class Item {
     public:
-      Item(const uint32_t* vec, size_t length);
+      Item(const RemapClass& parent, const uint32_t* vec, size_t length);
       ~Item(void);
       void append_filter(const uint32_t* vec, size_t length);
 
@@ -49,13 +45,15 @@ namespace org_pqrs_KeyRemap4MacBook {
       //
       void remap_forcenumlockon(ListHookedKeyboard::Item* item);
 
-      void call_disabled_callback(void);
+      bool active(void) const { return active_; }
 
     private:
       bool isblocked(void);
 
       Item(const Item& rhs);
       Item& operator=(const Item& rhs);
+
+      const RemapClass& parent_;
 
       uint32_t type_;
 
@@ -64,9 +62,6 @@ namespace org_pqrs_KeyRemap4MacBook {
 
       union {
         RemapFunc::KeyToKey* keyToKey;
-        RemapFunc::KeyToConsumer* keyToConsumer;
-        RemapFunc::KeyToPointingButton* keyToPointingButton;
-        RemapFunc::ConsumerToConsumer* consumerToConsumer;
         RemapFunc::DoublePressModifier* doublePressModifier;
         RemapFunc::DropKeyAfterRemap* dropKeyAfterRemap;
         RemapFunc::DropPointingRelativeCursorMove* dropPointingRelativeCursorMove;
@@ -77,7 +72,6 @@ namespace org_pqrs_KeyRemap4MacBook {
         RemapFunc::HoldingKeyToKey* holdingKeyToKey;
         RemapFunc::IgnoreMultipleSameKeyPress* ignoreMultipleSameKeyPress;
         RemapFunc::KeyOverlaidModifier* keyOverlaidModifier;
-        RemapFunc::PointingButtonToPointingButton* pointingButtonToPointingButton;
         RemapFunc::PointingRelativeToScroll* pointingRelativeToScroll;
         RemapFunc::SimultaneousKeyPresses* simultaneousKeyPresses;
         RemapFunc::SetKeyboardType* setKeyboardType;
@@ -100,13 +94,13 @@ namespace org_pqrs_KeyRemap4MacBook {
 
     bool remap_simultaneouskeypresses(void);
     bool remap_dropkeyafterremap(const Params_KeyboardEventCallBack& params);
-    void call_disabled_callback(void);
     const char* get_statusmessage(void) const { return statusmessage_; }
     bool enabled(void) const { return enabled_; }
     void setEnabled(bool newval) { enabled_ = newval; }
     void toggleEnabled(void) { setEnabled(! enabled_); }
     bool is_simultaneouskeypresses(void) const { return is_simultaneouskeypresses_; }
     uint32_t get_configindex(void) const { return configindex_; }
+    bool hasActiveItem(void) const;
 
     static void log_allocation_count(void);
     static void reset_allocation_count(void);

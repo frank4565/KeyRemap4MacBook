@@ -15,12 +15,89 @@
     </item>
 
     <item>
-      <name>Arrow(Up/Down/Left/Right) Keys to Mouse Keys</name>
-      <identifier>remap.mousekeys_arrow</identifier>
-      <autogen>__KeyToKey__ KeyCode::CURSOR_UP,    KeyCode::VK_MOUSEKEY_UP</autogen>
-      <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN,  KeyCode::VK_MOUSEKEY_DOWN</autogen>
-      <autogen>__KeyToKey__ KeyCode::CURSOR_LEFT,  KeyCode::VK_MOUSEKEY_LEFT</autogen>
-      <autogen>__KeyToKey__ KeyCode::CURSOR_RIGHT, KeyCode::VK_MOUSEKEY_RIGHT</autogen>
+      <name>"Right command key + j/k" to scroll down/up</name>
+      <identifier>remap.right_command_jk_to_scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::J, ModifierFlag::COMMAND_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_DOWN,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::K, ModifierFlag::COMMAND_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_UP,
+      </autogen>
+    </item>
+    <item>
+      <name>"Right command key + h/l" to scroll left/right</name>
+      <identifier>remap.right_command_hl_to_scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::H, ModifierFlag::COMMAND_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::L, ModifierFlag::COMMAND_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_RIGHT,
+      </autogen>
+    </item>
+    <item>
+      <name>"Right option key + up down arrows" to scroll down/up</name>
+      <identifier>remap.right_command_arrow_to_scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_DOWN, ModifierFlag::OPTION_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_DOWN,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_UP, ModifierFlag::OPTION_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_UP,
+      </autogen>
+    </item>
+    <item>
+      <name>"Right option key + left right arrows" to scroll left/right</name>
+      <identifier>remap.right_command_leftrightarrow_to_scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_R,
+        KeyCode::VK_MOUSEKEY_SCROLL_RIGHT,
+      </autogen>
+    </item>
+
+    <item>
+      <name>"Left control key + qa" to scroll down/up</name>
+      <identifier>remap.left ctrl to scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::A, ModifierFlag::CONTROL_L,
+        KeyCode::VK_MOUSEKEY_SCROLL_DOWN,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::Q, ModifierFlag::CONTROL_L,
+        KeyCode::VK_MOUSEKEY_SCROLL_UP,
+      </autogen>
+    </item>
+    <item>
+      <name>"Left control key + ws to scroll left/right"</name>
+      <identifier>remap.left_ctrl_ws_to_scroll</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::W, ModifierFlag::CONTROL_L,
+        KeyCode::VK_MOUSEKEY_SCROLL_LEFT,
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::S, ModifierFlag::CONTROL_L,
+        KeyCode::VK_MOUSEKEY_SCROLL_RIGHT,
+      </autogen>
     </item>
 
     <item>
@@ -88,35 +165,58 @@
         <!-- ======================================== -->
         <block>
           <config_only>option.mousekeys_mode_commandL2leftclick</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::COMMAND_L, PointingButton::LEFT</autogen>
+          <autogen>__KeyToKey__ KeyCode::COMMAND_L, PointingButton::LEFT</autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_space2middleclick</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::SPACE, PointingButton::MIDDLE</autogen>
+          <autogen>__KeyToKey__ KeyCode::SPACE, PointingButton::MIDDLE</autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_commandR2rightclick</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::COMMAND_R, PointingButton::RIGHT</autogen>
+          <autogen>__KeyToKey__ KeyCode::COMMAND_R, PointingButton::RIGHT</autogen>
+        </block>
+        <block>
+          <config_only>option.mousekeys_n_to_click_lock</config_only>
+          <autogen>
+            __HoldingKeyToKey__
+            KeyCode::N,
+
+            @begin
+            KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT,
+            @end
+
+            @begin
+            PointingButton::LEFT,
+            PointingButton::LEFT,
+            KeyCode::VK_NONE,
+            Option::NOREPEAT,
+            @end
+          </autogen>
+          <autogen>
+            __KeyToKey__
+            KeyCode::DOT,
+            KeyCode::VK_MOUSEKEY_LOCK_BUTTON_ALL_FORCE_OFF,
+          </autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_wer2click</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::W, PointingButton::LEFT</autogen>
-          <autogen>__KeyToPointingButton__ KeyCode::E, PointingButton::MIDDLE</autogen>
-          <autogen>__KeyToPointingButton__ KeyCode::R, PointingButton::RIGHT</autogen>
+          <autogen>__KeyToKey__ KeyCode::W, PointingButton::LEFT</autogen>
+          <autogen>__KeyToKey__ KeyCode::E, PointingButton::MIDDLE</autogen>
+          <autogen>__KeyToKey__ KeyCode::R, PointingButton::RIGHT</autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_uio2click</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::U, PointingButton::LEFT</autogen>
-          <autogen>__KeyToPointingButton__ KeyCode::I, PointingButton::MIDDLE</autogen>
-          <autogen>__KeyToPointingButton__ KeyCode::O, PointingButton::RIGHT</autogen>
+          <autogen>__KeyToKey__ KeyCode::U, PointingButton::LEFT</autogen>
+          <autogen>__KeyToKey__ KeyCode::I, PointingButton::MIDDLE</autogen>
+          <autogen>__KeyToKey__ KeyCode::O, PointingButton::RIGHT</autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_jis_eisuu2leftclick</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::JIS_EISUU, PointingButton::LEFT</autogen>
+          <autogen>__KeyToKey__ KeyCode::JIS_EISUU, PointingButton::LEFT</autogen>
         </block>
         <block>
           <config_only>option.mousekeys_mode_jis_kana2rightclick</config_only>
-          <autogen>__KeyToPointingButton__ KeyCode::JIS_KANA, PointingButton::RIGHT</autogen>
+          <autogen>__KeyToKey__ KeyCode::JIS_KANA, PointingButton::RIGHT</autogen>
         </block>
       </item>
       <item>
@@ -147,6 +247,12 @@
       <item>
         <name>[Option] Change right command key to right click in Mouse Keys Mode</name>
         <identifier>option.mousekeys_mode_commandR2rightclick</identifier>
+      </item>
+      <item>
+        <name>[Option] Use N key to click lock in Mouse Keys Mode.</name>
+        <appendix>(+ Holding N key to double-click)</appendix>
+        <appendix>(Use . key to release click.)</appendix>
+        <identifier>option.mousekeys_n_to_click_lock</identifier>
       </item>
       <item><name>──────────────────────────────</name></item>
       <item>
@@ -207,6 +313,7 @@
         <identifier>remap.mouse_keys_mode_holding_m</identifier>
         <autogen>__HoldingKeyToKey__ KeyCode::M, ModifierFlag::NONE, KeyCode::M, KeyCode::VK_NONE, KeyCode::VK_CONFIG_TOGGLE_notsave_mousekeys_mode</autogen>
       </item>
+      <item><name>──────────────────────────────</name></item>
       <item>
         <name>[Option] WER to Click</name>
         <appendix>- W to LeftClick</appendix>
@@ -250,7 +357,7 @@
     <item>
       <name>Control+L to RightClick</name>
       <identifier>remap.control_l2rightclick</identifier>
-      <autogen>__KeyToPointingButton__ KeyCode::L, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL, PointingButton::RIGHT</autogen>
+      <autogen>__KeyToKey__ KeyCode::L, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL, PointingButton::RIGHT</autogen>
     </item>
 
     <item>
@@ -348,6 +455,15 @@
         <appendix>control+fn+3 = move mouse fixed distance up</appendix>
         <identifier>option.mousekeys_with_lefthand_fixed_distance_with_control_fn</identifier>
       </item>
+    </item>
+
+    <item>
+      <name>Arrow(Up/Down/Left/Right) Keys to Mouse Keys</name>
+      <identifier>remap.mousekeys_arrow</identifier>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_UP,    KeyCode::VK_MOUSEKEY_UP</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN,  KeyCode::VK_MOUSEKEY_DOWN</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_LEFT,  KeyCode::VK_MOUSEKEY_LEFT</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_RIGHT, KeyCode::VK_MOUSEKEY_RIGHT</autogen>
     </item>
   </item>
 </root>
