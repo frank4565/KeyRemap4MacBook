@@ -1,3 +1,5 @@
+Force the status message to always appear in the main screen. The original version can not handle multiple screens correctly.
+
 KeyRemap4MacBook
 ================
 
